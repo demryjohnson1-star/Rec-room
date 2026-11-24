@@ -1,0 +1,13 @@
+{
+  "name": "recworld",
+  "version": "0.2.0",
+  "private": true,
+  "description": "RecWorld - original 3D social multiplayer prototype",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=18" },
+  "dependencies": {
+    "express": "^4.21.2",
+    "socket.io": "^4.8.1"
+  }
+}
