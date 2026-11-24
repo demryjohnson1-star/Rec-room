@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <meta name="theme-color" content="#101b2d">
+  <title>RecWorld</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div id="loading" class="screen">
+    <div class="logo-mark">RW</div><h1>RECWORLD</h1>
+    <p id="load-status">Building your world…</p><div class="load-track"><i></i></div>
+  </div>
+
+  <main id="game-shell" class="hidden">
+    <div id="scene"></div>
+    <header class="topbar">
+      <button class="brand" data-panel="home">◈ RECWORLD</button>
+      <div class="online"><i></i><span id="online-count">1 online</span></div>
+      <button class="round-btn" id="open-watch" aria-label="Open watch">◷</button>
+    </header>
+
+    <section class="hud-left">
+      <div class="player-chip"><div id="avatar-dot"></div><span id="hud-name">Guest</span></div>
+      <div class="room-chip"><span>LOCATION</span><b id="room-label">Plaza</b></div>
+    </section>
+
+    <section id="chat-log" class="chat-log"></section>
+    <form id="chat-form" class="chat-form">
+      <input id="chat-input" maxlength="180" placeholder="Say something…" autocomplete="off">
+      <button>➤</button>
+    </form>
+
+    <div class="mobile-controls" id="mobile-controls">
+      <div id="joystick"><div id="stick"></div></div>
+      <button id="jump-btn">JUMP</button>
+    </div>
+    <div class="hint" id="control-hint">WASD to move · drag to look · V to switch camera</div>
+
+    <aside id="watch" class="watch hidden">
+      <div class="watch-head"><div><small>RECWORLD</small><h2>Wrist Menu</h2></div><button id="close-watch">✕</button></div>
+      <nav class="watch-tabs">
+        <button class="active" data-tab="home">Home</button>
+        <button data-tab="rooms">Rooms</button>
+        <button data-tab="avatar">Avatar</button>
+        <button data-tab="create">Create</button>
+        <button data-tab="settings">Settings</button>
+      </nav>
+      <div class="watch-content">
+        <section class="tab-page" id="tab-home">
+          <div class="welcome-card"><span>YOUR WORLD, YOUR WAY</span><h3>Welcome to RecWorld</h3><p>Meet people, explore rooms, and build something cool.</p></div>
+          <div class="quick-grid">
+            <button data-tab-jump="rooms"><b>◎</b>Explore rooms</button>
+            <button data-tab-jump="avatar"><b>♙</b>Customize avatar</button>
+            <button data-tab-jump="create"><b>＋</b>Maker tools</button>
+            <button id="camera-toggle"><b>◉</b>Switch camera</button>
+          </div>
+          <p class="subtle">Prototype build 0.2 · Original RecWorld project</p>
+        </section>
+        <section class="tab-page hidden" id="tab-rooms">
+          <h3>Explore rooms</h3><p class="subtle">Jump between live hangouts.</p>
+          <div id="room-list" class="room-list"></div>
+        </section>
+        <section class="tab-page hidden" id="tab-avatar">
+          <h3>Your avatar</h3><p class="subtle">Choose a display name and body color.</p>
+          <label>Display name<input id="name-input" maxlength="18" value="Guest"></label>
+          <label>Avatar color<input id="color-input" type="color" value="#56c8f5"></label>
+          <button class="primary wide" id="save-profile">Save avatar</button>
+          <div class="avatar-preview"><div id="preview-avatar"></div><span>Preview</span></div>
+        </section>
+        <section class="tab-page hidden" id="tab-create">
+          <h3>Maker tools</h3><p class="subtle">Place simple shared objects in the current room.</p>
+          <label>Shape<select id="shape-input"><option value="box">Cube</option><option value="sphere">Sphere</option></select></label>
+          <label>Object color<input id="object-color" type="color" value="#f4b942"></label>
+          <button class="primary wide" id="place-object">Place object in front</button>
+          <p class="subtle">Objects are synchronized with everyone in this room. This is an early Maker tool, not the finished Maker Pen.</p>
+        </section>
+        <section class="tab-page hidden" id="tab-settings">
+          <h3>Settings</h3>
+          <label class="toggle-row">Third-person camera <input id="camera-setting" type="checkbox" checked></label>
+          <label class="toggle-row">Show mobile controls <input id="mobile-setting" type="checkbox" checked></label>
+          <p class="subtle">PC: WASD / arrow keys to move, mouse drag to look, Space to jump, V to switch camera. Mobile: left thumb pad to move, drag the scene to look.</p>
+        </section>
+      </div>
+      <div class="watch-foot"><span id="connection-state">Connecting…</span><span>RECWORLD 0.2</span></div>
+    </aside>
+  </main>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="module" src="/game.js"></script>
+</body>
+</html>
